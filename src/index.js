@@ -5,17 +5,22 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Game from "./components/Game/Game";
+import store from './reducers/configure-store'
+import { Provider } from 'react-redux'
+import history from './reducers/history';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}>
     <BrowserRouter>
-      <Routes>
+      <Routes history={history}>
         <Route path="/" element={<Layout />}>
           <Route index element={<Game />}/>
-          <Route path="results" element={<span> SUCCESS!</span>} />
+          <Route path="/results" element={<span> SUCCESS!</span>} />
         </Route>
       </Routes>
     </BrowserRouter>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

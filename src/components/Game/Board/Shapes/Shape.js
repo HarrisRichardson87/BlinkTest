@@ -1,5 +1,7 @@
 import { useDrag } from 'react-dnd'
-import { ShapeTypes } from './ShapeTypes.js'
+import { useDispatch } from 'react-redux'
+import history from '../../../../reducers/history'
+
 const style = {
   border: '1px dashed gray',
   backgroundColor: 'white',
@@ -8,15 +10,17 @@ const style = {
   marginRight:"20px"
 }
 
-export const Shape = function Shape({ name, type, css }) {
+export const Shape = function Shape({ type, css}) {
+  const dispatch = useDispatch(); // Use redux dispatch
+
   const [{ isDragging }, drag] = useDrag(() => ({
     type: type,
-    item: { name },
+    item: { type },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult()
       if (item && dropResult) {
-        // Send user to success page
-        alert(`You dropped ${item.name} into ${dropResult.name}!`)
+        // Send user to success page using redux TODO
+        history.push("/results")
       }
     },
     collect: (monitor) => ({

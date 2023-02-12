@@ -1,5 +1,5 @@
 import { useDrop } from 'react-dnd'
-export const Target = ({ type, name, css }) => {
+export const Target = ({ type, css }) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: type,
     drop: () => ({ name: 'Target' }),

@@ -1,15 +1,13 @@
-import { memo, useEffect, useState } from 'react'
+import { memo } from 'react'
 import { Shape } from './Shapes/Shape.js'
 import { Target } from './Target/Target.js'
 import { ShapeTypes } from "./Shapes/ShapeTypes";
+
+// CSS Inline styles
 const board = {
   display:"flex",
   justifyContent:"center",
   flexDirection:"row"
-}
-const target = {
-  display:"flex",
-  justifyContent:"center",
 }
 const shapes = {
   display:"flex",
@@ -52,13 +50,13 @@ export const Board = memo(function Board({type}) {
       <div>
         Connect matching shapes together
       </div>
-      <div >
+      <div>
         <Target type={type} css={getShapeCss()} />
       </div>
       <div style={{...shapes}}>
-        <Shape type={ShapeTypes.TRIANGLE}  name="TRIANGLE"  css={triangle} />
-        <Shape type={ShapeTypes.RECTANGLE} name="RECTANGLE" css={rectangle}/>
-        <Shape type={ShapeTypes.CIRCLE}    name="CIRCLE"    css={circle}   />
+        <Shape type={ShapeTypes.TRIANGLE}   css={triangle} />
+        <Shape type={ShapeTypes.RECTANGLE}  css={rectangle}/>
+        <Shape type={ShapeTypes.CIRCLE}     css={circle}   />
       </div>
     </div>
   )
