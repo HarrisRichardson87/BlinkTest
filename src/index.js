@@ -5,9 +5,9 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Game from "./components/Game/Game";
-import store from './reducers/configure-store'
+import store from './redux/configure-store'
 import { Provider } from 'react-redux'
-import history from './reducers/history';
+import history from './redux/history';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

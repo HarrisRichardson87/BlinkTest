@@ -1,6 +1,6 @@
 import { useDrag } from 'react-dnd'
 import { useDispatch } from 'react-redux'
-import history from '../../../../reducers/history'
+import { success } from './ShapeSlice';
 
 const style = {
   border: '1px dashed gray',
@@ -20,7 +20,7 @@ export const Shape = function Shape({ type, css}) {
       const dropResult = monitor.getDropResult()
       if (item && dropResult) {
         // Send user to success page using redux TODO
-        history.push("/results")
+        dispatch(success())
       }
     },
     collect: (monitor) => ({
