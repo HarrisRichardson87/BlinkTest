@@ -1,18 +1,8 @@
-import { memo } from 'react'
 import { Shape } from './Shapes/Shape.js'
 import { Target } from './Target/Target.js'
 import { ShapeTypes } from "./Shapes/ShapeTypes";
-
+import styles from "./Board.module.css";
 // CSS Inline styles
-const board = {
-  display:"flex",
-  justifyContent:"center",
-  flexDirection:"row"
-}
-const shapes = {
-  display:"flex",
-  justifyContent:"space-between",
-}
 const triangle = {
 	width: "0",
 	height: "0",
@@ -32,7 +22,7 @@ const circle = {
   borderRadius: "50%",
 }
 
-export const Board = memo(function Board({type}) {
+export const Board = function Board({type}) {
 
   const getShapeCss = () =>{
     // Get corresponding css for your target type
@@ -45,19 +35,26 @@ export const Board = memo(function Board({type}) {
         return triangle;
     }
   }
+  const getTarget = (type) => {
+    return <Target type={type} css={getShapeCss()}/>;
+  }
   return (
-    <div style={{ ...board}}>
+    <div className={styles.board}>
       <div>
-        Connect matching shapes together
+        Connect matching shapes together....
       </div>
-      <div>
-        <Target type={type} css={getShapeCss()} />
+      <div className={styles.target}>
+        {/**Obviously we want to just pass the type here but there is something wrong with the react dnd see 
+        https://github.com/react-dnd/react-dnd/issues/2732#issuecomment-677739822 **/}
+        {type === ShapeTypes.CIRCLE    && <Target type={ShapeTypes.CIRCLE}    css={getShapeCss()}/>}
+        {type === ShapeTypes.RECTANGLE && <Target type={ShapeTypes.RECTANGLE} css={getShapeCss()}/>}
+        {type === ShapeTypes.TRIANGLE  && <Target type={ShapeTypes.TRIANGLE}  css={getShapeCss()}/>}
       </div>
-      <div style={{...shapes}}>
-        <Shape type={ShapeTypes.TRIANGLE}   css={triangle} />
+      <div className={styles.shapes}>
+        <Shape type={ShapeTypes.TRIANGLE }  css={triangle }/>
         <Shape type={ShapeTypes.RECTANGLE}  css={rectangle}/>
-        <Shape type={ShapeTypes.CIRCLE}     css={circle}   />
+        <Shape type={ShapeTypes.CIRCLE   }  css={circle   }/>
       </div>
     </div>
   )
-})
+};

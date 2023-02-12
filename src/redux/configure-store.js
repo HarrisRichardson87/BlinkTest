@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
-
 import shapeSlice from '../components/Game/Board/Shapes/ShapeSlice';
-import history from './history';
+const initialState = { index: 0 }; // Shape target type index
 export default configureStore({
   reducer: {
-    shape: shapeSlice
-  }, 
-  history: history
+    shape: shapeSlice,
+    rootReducer:(state = initialState, action) =>{
+      return state;
+    }
+  },
+  preloadedState: initialState 
 })

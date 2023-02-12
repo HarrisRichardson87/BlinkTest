@@ -4,7 +4,7 @@ import { ShapeTypes } from './ShapeTypes';
 export const shapeSlice = createSlice({
   name: 'shapeSlice',
   initialState: {
-    value: ShapeTypes.CIRCLE, // here I would change the type in the Game component, and subscribe it, here is an example
+    index: 0, // here I would change the type in the Game component, and subscribe it, here is an example
   },
   reducers: {
     success: state => {
@@ -12,9 +12,15 @@ export const shapeSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      // Push
-      history.push("/results");
-      history.go(0)
+
+      // Move target to the next shape, user has successfully connected them
+      state.index += 1;
+
+      // Push to success page if they have three successful turns
+      if(state.index == 3){
+        history.push("/results");
+        history.go(0);
+      }
     }
   }
 })
